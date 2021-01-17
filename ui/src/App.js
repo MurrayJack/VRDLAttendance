@@ -5,35 +5,49 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import  {Scrim} from "./pages/scrim"
+import { Scrim } from "./pages/scrim"
+import { HomePage } from "./pages/HomePage"
+import { Officials } from "./pages/officials"
+import { config } from "./config";
+import firebase from "firebase/app";
+import { FirestoreProvider } from "@react-firebase/firestore";
+import { AddOfficial } from "./components/AddOfficial";
+import { pages } from "./pages/pages";
+import { NewScrimPage } from "./pages/NewScrimPage";
 
 function App() {
   return (
     <Router>
+      <FirestoreProvider firebase={firebase} {...config}>
 
+        {/* <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/scrim">Scrim</Link></li>
+          <li><Link to="/Officials">Officials</Link></li>
+          <li><Link to="/AddOfficial">Add Offical</Link></li>
 
-      <ul>
+          <li>New Scrim -> name -> positions</li>
+        </ul> */}
 
-        <li><Link to="/">Home</Link></li>
+        <Switch>
+          <Route path={pages.AddScrimPage}>
+            <NewScrimPage />
+          </Route>
 
-        <li><Link to="/scrim">Scrim</Link></li>
+          <Route path="/AddOfficial">
+            <AddOfficial />
+          </Route>
 
+          <Route path="/Officials">
+            <Officials />
+          </Route>
 
-      </ul>
+          <Route path="/">
+            <HomePage />
+          </Route>
 
-      <Switch>
-        <Route path="/Scrim">
-          <Scrim />
-        </Route>
-
-        <Route path="/users">
-          <div>users</div>
-        </Route>
-        <Route path="/">
-          <div>root</div>
-        </Route>
-      </Switch>
-
+        </Switch>
+      </FirestoreProvider>
     </Router>
   );
 }
