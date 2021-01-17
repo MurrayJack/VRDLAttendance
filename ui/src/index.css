@@ -24,7 +24,6 @@ h1, h2 {
     text-align: center;
 }
 
-input, 
 button {
   width: 100%;
   box-sizing: border-box;
@@ -33,4 +32,12 @@ button {
   padding: 8px;
   border: 0;
 }
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 0;
+}
+
 

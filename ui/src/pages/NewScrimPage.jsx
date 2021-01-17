@@ -6,13 +6,14 @@ import { Screen } from "../components/Screen";
 export const NewScrimPage = () => {
 
     return (
-        <Screen caption="Add Scrim">
+        <Screen allowBack caption="Add Scrim">
             <form>
 
+                <input placeholder="Name" />
 
-                
             </form>
 
+            <h3>Assign Positions</h3>
 
             <PositionsList />
         </Screen>

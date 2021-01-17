@@ -1,14 +1,19 @@
 import React from "react";
-import { Stack } from "./";
+import { Stack, HStack } from "./";
+import { useHistory } from "react-router-dom";
 
-export const Screen = ({ children, caption }) => {
+export const Screen = ({ children, caption, allowBack }) => {
+
+   const history = useHistory();
 
    return (
       <Stack>
-         <div>
-            <button>&lt;</button>
+         <HStack>
+            {allowBack && <div>
+               <button onClick={() => history.push("/")}>&lt;</button>
+            </div>}
             <h2>{caption}</h2>
-         </div>
+         </HStack>
          {children}
       </Stack>
    );

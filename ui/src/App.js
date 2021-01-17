@@ -19,16 +19,6 @@ function App() {
   return (
     <Router>
       <FirestoreProvider firebase={firebase} {...config}>
-
-        {/* <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/scrim">Scrim</Link></li>
-          <li><Link to="/Officials">Officials</Link></li>
-          <li><Link to="/AddOfficial">Add Offical</Link></li>
-
-          <li>New Scrim -> name -> positions</li>
-        </ul> */}
-
         <Switch>
           <Route path={pages.AddScrimPage}>
             <NewScrimPage />
