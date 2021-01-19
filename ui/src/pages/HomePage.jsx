@@ -13,12 +13,9 @@ export const HomePage = () => {
                 <button onClick={() => history.push(`${pages.AddScrimPage}`)}>Add Scrim</button>
                 <button>Todays Scrims</button>
                 <hr />
-                <button>Add Official</button>
-                <button>All Officials</button>
+                <button onClick={() => history.push(`${pages.AddOfficial}`)}>Add Official</button>
+                <button onClick={() => history.push(`${pages.AllOfficials}`)}>All Officials</button>
             </Stack>
         </Screen>
     );
 };
-
-
-//AllOfficials

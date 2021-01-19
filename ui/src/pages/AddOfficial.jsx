@@ -1,10 +1,9 @@
 import React from "react";
 import "firebase/firestore";
 import { FirestoreMutation } from "@react-firebase/firestore";
-import firebase from "firebase/app";
 import { Label } from "../components/Label";
 import { v4 as uuidv4 } from "uuid"
-import { Stack } from "../components/Stack";
+import { Screen } from "../components";
 
 export const AddOfficial = () => {
 
@@ -21,11 +20,12 @@ export const AddOfficial = () => {
     }
 
     return (
-        <FirestoreMutation type="set" path={`/officials/${uuidv4()}`}>
-            {({ runMutation }) => {
-                return (
-                    <form onSubmit={e => handleSave(e, runMutation)}>
-                        <Stack>
+        <Screen allowBack caption="Add Official">
+            <FirestoreMutation type="set" path={`/officials/${uuidv4()}`}>
+                {({ runMutation }) => {
+                    return (
+                        <form onSubmit={e => handleSave(e, runMutation)}>
+
                             <h2>Add Official</h2>
 
                             <Label caption="Legal Name">
@@ -46,10 +46,11 @@ export const AddOfficial = () => {
 
                             <button>Add Official</button>
 
-                        </Stack>
-                    </form >
-                );
-            }}
-        </FirestoreMutation >
+
+                        </form >
+                    );
+                }}
+            </FirestoreMutation >
+        </Screen>
     );
 };

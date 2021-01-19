@@ -1,66 +1,65 @@
 import React, { useState } from "react";
-import { PositionsList } from "../components/PositionsList";
 import { Screen } from "../components/Screen";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { FirestoreMutation } from "@react-firebase/firestore";
 import { v4 as uuidv4 } from "uuid"
 import { useHistory } from "react-router-dom";
+import { AddPosition } from "../components/AddPosition";
 
 export const NewScrimPage = () => {
 
     const history = useHistory();
     const [adding, showAdding] = useState(false)
-    const [officials, setOfficials] = useState([{ official: "123", position: " 123" }])
+    const [officials, setOfficials] = useState([])
+    const [name, setName] = useState("")
 
-    const handleSave = (e, mutation) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
+    const handleSave = (mutation) => {
 
-        var object = {
+        const object = {
+            positions: officials,
+            name: name,
             date: firebase.firestore.FieldValue.serverTimestamp()
-        };
-        
-        data.forEach(function (value, key) {
-            object[key] = value;
-        });
-
-        
+        }
 
         mutation(object).then(() => history.push("/"))
+    }
+
+    const handleAddPosition = (official, position) => {
+        officials.push({ official, position });
+        setOfficials(officials)
+        showAdding(false)
     }
 
     return (
         <FirestoreMutation type="set" path={`/scrims/${uuidv4()}`}>
             {({ runMutation }) => (
-                <form onSubmit={e => handleSave(e, runMutation)}>
-                    <Screen allowBack caption="Add Scrim">
+                <Screen allowBack caption="Add Scrim">
 
-                        <input required placeholder="Name" name="name" />
+                    <input placeholder="Name" name="name" value={name} onChange={e => setName(e.target.value)} />
 
-                        <button class="primary">Add Scrim</button>
+                    <h3>Assign Positions</h3>
 
-                        <h3>Assign Positions</h3>
+                    <button type="button" onClick={() => showAdding(true)}>Add Position</button>
 
-                        <button type="button" onClick={() => showAdding(true)}>Add Officials</button>
+                    {adding && <AddPosition onCancel={() => showAdding(false)} onAccept={handleAddPosition} />}
 
-                        {adding && <>
-                            <select required placeholder="Official" name="official" />
+                    <h3>Current Positions</h3>
 
-                            <select required placeholder="Position" name="position" />
+                    <table>
+                        <thead>
+                            <td>Official</td>
+                            <td>Position</td>
+                        </thead>
+                        <tbody>
+                            {officials.map(e => <tr><td>{e.official}</td><td>{e.position}</td></tr>)}
+                        </tbody>
+                    </table>
 
-                            <button>ok</button>
-
-                            <button onClick={() => showAdding(false)} type="button">Cancel</button>
-                        </>}
-
-                        <h3>Current Positions</h3>
-
-                        {JSON.stringify(officials)}
-
-                    </Screen>
-                </form>
+                    <button onClick={() => handleSave(runMutation)} class="primary">Add Scrim</button>
+                </Screen>
             )}
         </FirestoreMutation >
     );
 };
+

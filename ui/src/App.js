@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import { Scrim } from "./pages/scrim"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage"
-import { Officials } from "./pages/officials"
+import { AllOfficials } from "./pages/AllOfficials"
 import { config } from "./config";
 import firebase from "firebase/app";
 import { FirestoreProvider } from "@react-firebase/firestore";
@@ -25,12 +19,12 @@ function App() {
             <NewScrimPage />
           </Route>
 
-          <Route path="/AddOfficial">
+          <Route path={pages.AddOfficial}>
             <AddOfficial />
           </Route>
 
-          <Route path="/Officials">
-            <Officials />
+          <Route path={pages.AllOfficials}>
+            <AllOfficials />
           </Route>
 
           <Route path="/">
