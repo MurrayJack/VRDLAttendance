@@ -11,8 +11,10 @@ export const HomePage = () => {
         <Screen caption="Home">
             <Stack>
                 <button onClick={() => history.push(`${pages.AddScrimPage}`)}>Add Scrim</button>
-                <button>Officials</button>
-                <button>Settings</button>
+                <button>Todays Scrims</button>
+                <hr />
+                <button>Add Official</button>
+                <button>All Officials</button>
             </Stack>
         </Screen>
     );

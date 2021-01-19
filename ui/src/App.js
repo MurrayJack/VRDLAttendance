@@ -11,7 +11,7 @@ import { Officials } from "./pages/officials"
 import { config } from "./config";
 import firebase from "firebase/app";
 import { FirestoreProvider } from "@react-firebase/firestore";
-import { AddOfficial } from "./components/AddOfficial";
+import { AddOfficial } from "./pages/AddOfficial";
 import { pages } from "./pages/pages";
 import { NewScrimPage } from "./pages/NewScrimPage";
 
@@ -19,6 +19,7 @@ function App() {
   return (
     <Router>
       <FirestoreProvider firebase={firebase} {...config}>
+
         <Switch>
           <Route path={pages.AddScrimPage}>
             <NewScrimPage />

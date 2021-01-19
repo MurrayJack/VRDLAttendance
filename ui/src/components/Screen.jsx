@@ -10,7 +10,7 @@ export const Screen = ({ children, caption, allowBack }) => {
       <Stack>
          <HStack>
             {allowBack && <div>
-               <button onClick={() => history.push("/")}>&lt;</button>
+               <button class="back" onClick={() => history.push("/")}>&lt;</button>
             </div>}
             <h2>{caption}</h2>
          </HStack>

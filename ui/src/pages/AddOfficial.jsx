@@ -2,9 +2,9 @@ import React from "react";
 import "firebase/firestore";
 import { FirestoreMutation } from "@react-firebase/firestore";
 import firebase from "firebase/app";
-import { Label } from "./Label";
+import { Label } from "../components/Label";
 import { v4 as uuidv4 } from "uuid"
-import { Stack } from "./Stack";
+import { Stack } from "../components/Stack";
 
 export const AddOfficial = () => {
 
