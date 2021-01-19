@@ -1,7 +1,6 @@
 import React from "react";
 import "firebase/firestore";
 import { FirestoreCollection } from "@react-firebase/firestore";
-import { LinkButton } from "./LinkButton";
 
 export const PositionsList = () => {
 
@@ -13,8 +12,12 @@ export const PositionsList = () => {
                         <>Loading</>
                     ) : (
                             <>
-                                {/* <pre>{JSON.stringify(d.value, null, 2)}</pre> */}
-                                {d.value.map(e => <LinkButton>{e.name} () &gt;</LinkButton>)}
+                                <div>
+                                    <select>
+                                        <option>- Select Position -</option>
+                                        {d.value.map((e, i) => <option value={d.ids[i]}>{e.name}</option>)}
+                                    </select>
+                                </div>
                             </>
                         );
                 }}

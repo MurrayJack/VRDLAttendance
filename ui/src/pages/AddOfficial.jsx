@@ -3,7 +3,7 @@ import "firebase/firestore";
 import { FirestoreMutation } from "@react-firebase/firestore";
 import { Label } from "../components/Label";
 import { v4 as uuidv4 } from "uuid"
-import { Screen } from "../components";
+import { Screen, Stack } from "../components";
 
 export const AddOfficial = () => {
 
@@ -26,26 +26,25 @@ export const AddOfficial = () => {
                     return (
                         <form onSubmit={e => handleSave(e, runMutation)}>
 
-                            <h2>Add Official</h2>
+                            <Stack>
+                                <Label caption="Legal Name">
+                                    <input name="name" />
+                                </Label>
 
-                            <Label caption="Legal Name">
-                                <input name="name" />
-                            </Label>
+                                <Label caption="Derby Name">
+                                    <input name="legalName" />
+                                </Label>
 
-                            <Label caption="Derby Name">
-                                <input name="legalName" />
-                            </Label>
+                                <Label caption="VRDL official">
+                                    <input type="checkbox" name="vrdlMember" />
+                                </Label>
 
-                            <Label caption="VRDL official">
-                                <input type="checkbox" name="vrdlMember" />
-                            </Label>
+                                <Label caption="Waver Explained">
+                                    <input type="checkbox" name="waver" />
+                                </Label>
 
-                            <Label caption="Waver Explained">
-                                <input type="checkbox" name="waver" />
-                            </Label>
-
-                            <button>Add Official</button>
-
+                                <button>Add Official</button>
+                            </Stack>
 
                         </form >
                     );

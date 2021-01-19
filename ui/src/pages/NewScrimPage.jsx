@@ -6,6 +6,7 @@ import { FirestoreMutation } from "@react-firebase/firestore";
 import { v4 as uuidv4 } from "uuid"
 import { useHistory } from "react-router-dom";
 import { AddPosition } from "../components/AddPosition";
+import styled from "styled-components"
 
 export const NewScrimPage = () => {
 
@@ -32,34 +33,37 @@ export const NewScrimPage = () => {
     }
 
     return (
-        <FirestoreMutation type="set" path={`/scrims/${uuidv4()}`}>
-            {({ runMutation }) => (
-                <Screen allowBack caption="Add Scrim">
+        <Screen allowBack caption="Add Scrim">
+            <FirestoreMutation type="set" path={`/scrims/${uuidv4()}`}>
+                {({ runMutation }) => (
+                    <>
 
-                    <input placeholder="Name" name="name" value={name} onChange={e => setName(e.target.value)} />
+                        <input placeholder="Scrim Name" name="name" value={name} onChange={e => setName(e.target.value)} />
 
-                    <h3>Assign Positions</h3>
+                        <h3>Assign Positions</h3>
 
-                    <button type="button" onClick={() => showAdding(true)}>Add Position</button>
+                        {!adding && <button class="primary" type="button" onClick={() => showAdding(true)}>Add Position</button>}
 
-                    {adding && <AddPosition onCancel={() => showAdding(false)} onAccept={handleAddPosition} />}
+                        {adding && <AddPosition onCancel={() => showAdding(false)} onAccept={handleAddPosition} />}
 
-                    <h3>Current Positions</h3>
+                        <h3>Current Positions</h3>
 
-                    <table>
-                        <thead>
-                            <td>Official</td>
-                            <td>Position</td>
-                        </thead>
-                        <tbody>
-                            {officials.map(e => <tr><td>{e.official}</td><td>{e.position}</td></tr>)}
-                        </tbody>
-                    </table>
+                        <table>
+                            <thead>
+                                <td>Official</td>
+                                <td>Position</td>
+                            </thead>
+                            <tbody>
+                                {officials.map(e => <tr><td>{e.official}</td><td>{e.position}</td></tr>)}
+                            </tbody>
+                        </table>
 
-                    <button onClick={() => handleSave(runMutation)} class="primary">Add Scrim</button>
-                </Screen>
-            )}
-        </FirestoreMutation >
+                        <hr />
+
+                        <button onClick={() => handleSave(runMutation)} class="primary">Add Scrim</button>
+                    </>
+                )}
+            </FirestoreMutation >
+        </Screen>
     );
 };
-

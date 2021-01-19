@@ -1,4 +1,7 @@
 import React from "react";
+import { OfficialSelect } from "./OfficialSelect"
+import { PositionsList } from "./PositionsList"
+import { HStack, VStack } from "./"
 
 export const AddPosition = ({ onCancel, onAccept }) => {
 
@@ -6,14 +9,18 @@ export const AddPosition = ({ onCancel, onAccept }) => {
     const [position, setPosition] = React.useState("")
 
     return (
-        <div>
-            <input required placeholder="Official" name="official" value={official} onChange={e => setOfficial(e.target.value)} />
+        <VStack>
 
-            <input required placeholder="Position" name="position" value={position} onChange={e => setPosition(e.target.value)}  />
+            <OfficialSelect value={official} onChange={setOfficial} />
 
-            <button type="button" onClick={() => onAccept(official, position)}>ok</button>
+            <PositionsList value={position} onChange={setPosition} />
 
-            <button onClick={onCancel} type="button">Cancel</button>
-        </div>
+
+            <HStack col="1fr 1fr">
+                <button type="button" onClick={() => onAccept(official, position)}>Add</button>
+
+                <button onClick={onCancel} type="button">Cancel</button>
+            </HStack>
+        </VStack>
     );
 };

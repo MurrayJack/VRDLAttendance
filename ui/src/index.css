@@ -1,3 +1,10 @@
+:root {
+  --color-background: #2c3e50;
+
+  --color-primary-bg: #2980b9;
+  --color-primary-fg: #ecf0f1;
+}
+
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +12,7 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #344e5c;
+    background: var(--color-background);
     color: white;
   }
 
@@ -20,6 +27,20 @@ body {
 }
 
 input { -webkit-user-select:text;}
+
+button, 
+select, 
+input {
+  width: 100%;
+  padding: 8px;;
+}
+
+button {
+  background: #2980b9;
+  color: white;
+  border: 0;
+}
+
 
 /* ul {
     padding: 0;
