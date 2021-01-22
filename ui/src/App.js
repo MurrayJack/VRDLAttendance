@@ -6,6 +6,7 @@ import { config } from "./config";
 import firebase from "firebase/app";
 import { FirestoreProvider } from "@react-firebase/firestore";
 import { AddOfficial } from "./pages/AddOfficial";
+import { EditOfficial } from "./pages/EditOfficial";
 import { pages } from "./pages/pages";
 import { NewScrimPage } from "./pages/NewScrimPage";
 
@@ -26,6 +27,11 @@ function App() {
           <Route path={pages.AllOfficials}>
             <AllOfficials />
           </Route>
+
+          <Route path="/edit-official">
+            <EditOfficial />
+          </Route>
+
 
           <Route path="/">
             <HomePage />

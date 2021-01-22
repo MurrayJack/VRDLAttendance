@@ -1,8 +1,8 @@
 import React from "react";
 
-export const Stack = ({ children }) => {
+export const Stack = ({ children, gap="8px"}) => {
    return (
-      <div style={{ display: "grid", gap: "8px", padding: "8px" }}>
+      <div style={{ display: "grid", gap, padding: "8px" }}>
          {children}
       </div>
    );

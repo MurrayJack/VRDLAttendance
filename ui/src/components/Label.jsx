@@ -1,11 +1,18 @@
 import React from "react";
+import styled from "styled-components"
 
 export const Label = ({ children, caption }) => {
 
     return (
-        <label>
+        <StyledLabel>
             <div>{caption}</div>
             {children}
-        </label>
+        </StyledLabel>
     );
 };
+
+const StyledLabel = styled.label`
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 8px;
+`

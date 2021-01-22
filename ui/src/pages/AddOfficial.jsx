@@ -4,19 +4,25 @@ import { FirestoreMutation } from "@react-firebase/firestore";
 import { Label } from "../components/Label";
 import { v4 as uuidv4 } from "uuid"
 import { Screen, Stack } from "../components";
+import { useHistory } from "react-router-dom";
 
 export const AddOfficial = () => {
 
-    const handleSave = (e, mutation) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
+    const [name, setName] = React.useState("")
+    const [derbyName, setDerbyName] = React.useState("")
+    const [vrdl, setVrdl] = React.useState("no")
+    const [waver, setWaver] = React.useState("no")
+    const history = useHistory();
 
-        var object = {};
-        data.forEach(function (value, key) {
-            object[key] = value;
-        });
+    const handleSave = (mutation) => {
+        const data = {
+            name,
+            derbyName,
+            vrdl,
+            waver
+        }
 
-        mutation(object).then(() => alert("save"))
+        mutation(data).then(() => history.push("/"))
     }
 
     return (
@@ -24,29 +30,35 @@ export const AddOfficial = () => {
             <FirestoreMutation type="set" path={`/officials/${uuidv4()}`}>
                 {({ runMutation }) => {
                     return (
-                        <form onSubmit={e => handleSave(e, runMutation)}>
 
-                            <Stack>
-                                <Label caption="Legal Name">
-                                    <input name="name" />
-                                </Label>
+                        <Stack gap="16px">
+                            <Label caption="Name">
+                                <input name="name" onChange={e => setName(e.target.value)} value={name} />
+                            </Label>
 
-                                <Label caption="Derby Name">
-                                    <input name="legalName" />
-                                </Label>
+                            <Label caption="Derby Name">
+                                <input name="legalName" onChange={e => setDerbyName(e.target.value)} value={derbyName} />
+                            </Label>
 
-                                <Label caption="VRDL official">
-                                    <input type="checkbox" name="vrdlMember" />
-                                </Label>
+                            <Label caption="VRDL official ?">
+                                <select value={vrdl} onChange={e => setVrdl(e.target.value)}>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </Label>
 
-                                <Label caption="Waver Explained">
-                                    <input type="checkbox" name="waver" />
-                                </Label>
+                            <Label caption="Waver Explained ?">
+                                <select value={waver} onChange={e => setWaver(e.target.value)}>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </Label>
 
-                                <button>Add Official</button>
-                            </Stack>
+                            <div style={{ height: "40px" }}></div>
 
-                        </form >
+                            <button onClick={() => handleSave(runMutation)}>Add Official</button>
+                        </Stack>
+
                     );
                 }}
             </FirestoreMutation >

@@ -1,6 +1,11 @@
 export const pages = {
     AddScrimPage: "/add-new-scrim",
+   
+    TodaysScrims: "/todays-scrims",
+
     AllOfficials: "/all-officials",
     AddOfficial: "/add-official",
-    TodaysScrims: "/todays-scrims"
+    
+    
+    EditOfficial: id => `/edit-official/${id}`
 }
