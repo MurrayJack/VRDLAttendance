@@ -16,6 +16,11 @@ function App() {
       <FirestoreProvider firebase={firebase} {...config}>
 
         <Switch>
+
+          <Route path="/edit-official/:id">
+            <EditOfficial />
+          </Route>
+
           <Route path={pages.AddScrimPage}>
             <NewScrimPage />
           </Route>
@@ -28,9 +33,7 @@ function App() {
             <AllOfficials />
           </Route>
 
-          <Route path="/edit-official">
-            <EditOfficial />
-          </Route>
+
 
 
           <Route path="/">
