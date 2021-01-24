@@ -3,11 +3,13 @@ import "firebase/firestore";
 import { FirestoreMutation, FirestoreDocument } from "@react-firebase/firestore";
 import { Screen, Stack, OfficialForm } from "../components";
 import { useHistory, useParams } from "react-router-dom";
+import { useQuery } from "../components/useQuery"
 
 export const EditOfficial = () => {
 
     let { id } = useParams();
     const history = useHistory();
+    const { get } = useQuery("officials")
 
     return (
         <FirestoreDocument path={`/officials/${id}`}>
@@ -24,6 +26,8 @@ export const EditOfficial = () => {
 
                             )}
                         </FirestoreMutation >
+
+                        {JSON.stringify(get("95d53ca7-6038-4c8b-b886-728fea788c8d").then(e => e))}
                     </Screen>;
             }}
         </FirestoreDocument>

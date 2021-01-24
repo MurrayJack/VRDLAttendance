@@ -11,7 +11,7 @@ export const OfficialSelect = ({value, onChange}) => {
                     <>Loading</>
                 ) : (
                         <div>
-                            <select onChange={e => onChange(e.target.value)}>
+                            <select value={value} onChange={e => onChange(e.target.value)}>
                                 <option>- Select Official -</option>
                                 {d.value.map((e, i) => <option value={d.ids[i]}>{e.name}</option>)}
                             </select>

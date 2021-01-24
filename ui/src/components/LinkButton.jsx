@@ -21,6 +21,7 @@ const Button = styled.button`
   background: var(--color-primary-bg);
   color: var(--color-primary-fg);
   height: 40px;
+  font-size: 16px;
 
   > span {
    display: grid;

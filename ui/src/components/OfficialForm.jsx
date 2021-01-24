@@ -10,7 +10,7 @@ export const OfficialForm = ({ name, derbyName, vrdlMember, insurance, league, o
       derbyName: derbyName || "",
       vrdlMember: vrdlMember || "",
       insurance: insurance || "",
-      league: league || "" 
+      league: league || ""
    })
 
    const handleOnchange = e => {
@@ -23,6 +23,7 @@ export const OfficialForm = ({ name, derbyName, vrdlMember, insurance, league, o
 
    return (
       <Stack gap="16px">
+
          <Label caption="Name">
             <input name="name" onChange={handleOnchange} value={data.name} />
          </Label>

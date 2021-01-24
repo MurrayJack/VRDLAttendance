@@ -2,7 +2,7 @@ import React from "react";
 import "firebase/firestore";
 import { FirestoreCollection } from "@react-firebase/firestore";
 
-export const PositionsList = () => {
+export const PositionsList = ({ value, onChange }) => {
 
     return (
         <>
@@ -13,7 +13,7 @@ export const PositionsList = () => {
                     ) : (
                             <>
                                 <div>
-                                    <select>
+                                    <select value={value} onChange={e => onChange(e.target.value)}>
                                         <option>- Select Position -</option>
                                         {d.value.map((e, i) => <option value={d.ids[i]}>{e.name}</option>)}
                                     </select>

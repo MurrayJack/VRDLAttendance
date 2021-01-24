@@ -9,6 +9,7 @@ import { AddOfficial } from "./pages/AddOfficial";
 import { EditOfficial } from "./pages/EditOfficial";
 import { pages } from "./pages/pages";
 import { NewScrimPage } from "./pages/NewScrimPage";
+import { TodaysScrimmages } from "./pages/TodaysScrimmages"
 
 function App() {
   return (
@@ -33,8 +34,9 @@ function App() {
             <AllOfficials />
           </Route>
 
-
-
+          <Route path={pages.TodaysScrims}>
+            <TodaysScrimmages />
+          </Route>
 
           <Route path="/">
             <HomePage />

@@ -10,15 +10,21 @@ export const HomePage = () => {
 
     return (
         <Screen caption="Attendance">
-            <LinkButton icon={CgAdd} onClick={() => history.push(`${pages.AddScrimPage}`)}>Add Scrim</LinkButton>
-            <LinkButton icon={CgCalendarDates} >Todays Scrims</LinkButton>
+            <h3>Today - (todays date)</h3>
+            <LinkButton icon={CgCalendarDates} onClick={() => history.push(`${pages.TodaysScrims}`)}>Todays Scrimmages</LinkButton>
+            <LinkButton icon={CgCalendarDates}>Todays Officials</LinkButton>
 
-            <h2>Officials</h2>
+
+            <h3>Scrimmages</h3>
+            <LinkButton icon={CgAdd} onClick={() => history.push(`${pages.AddScrimPage}`)}>Add Scrimmage</LinkButton>
+            <LinkButton icon={CgAdd}>All Scrimmages</LinkButton>
+            
+
+            <h3>Officials</h3>
 
             <LinkButton icon={CgUserAdd} onClick={() => history.push(`${pages.AddOfficial}`)}>New Official</LinkButton>
             <LinkButton icon={CgUserList} onClick={() => history.push(`${pages.AllOfficials}`)}>All Officials</LinkButton>
 
-            <h2>Settings</h2>
         </Screen>
     );
 };
