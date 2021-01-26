@@ -8,8 +8,8 @@ import { FirestoreProvider } from "@react-firebase/firestore";
 import { AddOfficial } from "./pages/AddOfficial";
 import { EditOfficial } from "./pages/EditOfficial";
 import { pages } from "./pages/pages";
-import { NewScrimPage } from "./pages/NewScrimPage";
-import { TodaysScrimmages } from "./pages/TodaysScrimmages"
+import { NewScrimPage } from "./pages/AddScrim";
+import { TodaysScrimmages } from "./pages/TodaysScrims"
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
             <EditOfficial />
           </Route>
 
-          <Route path={pages.AddScrimPage}>
+          <Route path={`${pages.AddScrimPage}/:id`}>
             <NewScrimPage />
           </Route>
 

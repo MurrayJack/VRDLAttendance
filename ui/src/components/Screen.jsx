@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components"
 import { CgSmile, CgChevronLeft } from "react-icons/cg";
 
-export const Screen = ({ children, caption, allowBack }) => {
+export const Screen = ({ children, caption, allowBack, onBack }) => {
 
    const history = useHistory();
 
@@ -14,7 +14,7 @@ export const Screen = ({ children, caption, allowBack }) => {
             <HStack col="40px 1fr">
                <HeaderIcon>
                   {allowBack
-                     ? <button class="back" onClick={() => history.push("/")}><CgChevronLeft size="24px" /></button>
+                     ? <button class="back" onClick={onBack ? onBack : () => history.push("/")}><CgChevronLeft size="24px" /></button>
                      : <CgSmile size="24px" />
                   }
                </HeaderIcon>

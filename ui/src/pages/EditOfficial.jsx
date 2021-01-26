@@ -1,36 +1,27 @@
 import React from "react";
 import "firebase/firestore";
-import { FirestoreMutation, FirestoreDocument } from "@react-firebase/firestore";
-import { Screen, Stack, OfficialForm } from "../components";
+import { Screen, OfficialForm, Loading } from "../components";
 import { useHistory, useParams } from "react-router-dom";
-import { useQuery } from "../components/useQuery"
+import { useGet, useSave } from "../components/useQuery"
+import { pages } from "../pages/pages"
 
 export const EditOfficial = () => {
 
-    let { id } = useParams();
+    const { id } = useParams();
     const history = useHistory();
-    const { get } = useQuery("officials")
+
+    const { data, loading } = useGet("officials", id)
+    const { save } = useSave("officials")
 
     return (
-        <FirestoreDocument path={`/officials/${id}`}>
-            {d => {
-                return d.isLoading || !d.value
-                    ? <>Loading</>
-                    :
-                    <Screen allowBack caption={`${d.value.derbyName}`}>
-                        <FirestoreMutation type="set" path={`/officials/${id}`}>
-                            {({ runMutation }) => (
-                                <Stack gap="16px">
-                                    <OfficialForm {...d.value} buttonCaption="Save" onClick={(e => runMutation(e).then(() => history.push("/")))} />
-                                </Stack>
+        <Screen allowBack onBack={() => history.push(pages.AllOfficials)} caption={`${loading ? "Loading..." : data?.derbyName}`}>
 
-                            )}
-                        </FirestoreMutation >
+            {loading
+                ? <Loading />
+                : <OfficialForm {...data} buttonCaption="Save" onClick={e => save(id, e).then(() => history.push(pages.AllOfficials))} />
+            }
 
-                        {JSON.stringify(get("95d53ca7-6038-4c8b-b886-728fea788c8d").then(e => e))}
-                    </Screen>;
-            }}
-        </FirestoreDocument>
+        </Screen>
 
     );
 };
