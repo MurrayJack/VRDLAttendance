@@ -14,9 +14,7 @@ export const AddOfficial = () => {
         <Screen allowBack caption="Add Official">
             <FirestoreMutation type="set" path={`/officials/${uuidv4()}`}>
                 {({ runMutation }) => (
-                    <Stack gap="16px">
-                        <OfficialForm buttonCaption="Add" onClick={(e => runMutation(e).then(() => history.push("/")))} />
-                    </Stack>
+                    <OfficialForm buttonCaption="Add" onClick={(e => runMutation(e).then(() => history.push("/")))} />
                 )}
             </FirestoreMutation >
         </Screen>

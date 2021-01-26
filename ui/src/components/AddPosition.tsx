@@ -1,9 +1,14 @@
 import React from "react";
 import { OfficialSelect } from "./OfficialSelect"
-import { PositionsList } from "./PositionsList"
-import { HStack, VStack } from "./"
+import { PositionsSelect } from "./PositionsSelect"
+import { HStack, VStack } from "."
 
-export const AddPosition = ({ onCancel, onAccept }) => {
+interface IAddPosition {
+    onCancel: () => void;
+    onAccept: (official: string, position: string) => void;
+}
+
+export const AddPosition = ({ onCancel, onAccept }: IAddPosition) => {
 
     const [official, setOfficial] = React.useState("")
     const [position, setPosition] = React.useState("")
@@ -13,8 +18,7 @@ export const AddPosition = ({ onCancel, onAccept }) => {
 
             <OfficialSelect value={official} onChange={setOfficial} />
 
-            <PositionsList value={position} onChange={setPosition} />
-
+            <PositionsSelect value={position} onChange={setPosition} />
 
             <HStack col="1fr 1fr">
                 <button type="button" onClick={() => onAccept(official, position)}>Add</button>

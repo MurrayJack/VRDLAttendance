@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components"
 import { CgChevronRight, CgAdd } from "react-icons/cg";
 
-export const LinkButton = ({ children, icon = () => <CgAdd />, ...props }) => {
+interface ILinkButton {
+   caption?: string;
+   icon?: () => React.ReactNode;
+   onClick?: () => void;
+}
+
+export const LinkButton: React.FC<ILinkButton> = ({ children, caption = "", icon = () => <CgAdd />, ...props }) => {
 
    return (
       <>
@@ -10,6 +16,7 @@ export const LinkButton = ({ children, icon = () => <CgAdd />, ...props }) => {
             <span>
                {icon()}
                <span>{children}</span>
+               <span>{caption}</span>
                <CgChevronRight />
             </span>
          </Button>
@@ -27,7 +34,7 @@ const Button = styled.button`
    display: grid;
    align-items: center;
    text-align: left;
-   grid-template-columns: 14px 1fr 20px;
+   grid-template-columns: 14px 1fr auto 20px;
    gap: 8px;
   }
 `

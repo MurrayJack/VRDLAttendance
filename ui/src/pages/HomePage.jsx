@@ -7,21 +7,18 @@ import { CgCalendarDates, CgAdd, CgUserAdd, CgUserList } from "react-icons/cg";
 export const HomePage = () => {
 
     const history = useHistory();
+    const dateString = (new Date()).toLocaleDateString("en-AU", { year: 'numeric', month: 'numeric', day: 'numeric' });
 
     return (
         <Screen caption="Attendance">
-            <h3>Today - (todays date)</h3>
-            <LinkButton icon={CgCalendarDates} onClick={() => history.push(`${pages.TodaysScrims}`)}>Todays Scrimmages</LinkButton>
-            <LinkButton icon={CgCalendarDates}>Todays Officials</LinkButton>
+            <h3>Today - {dateString}</h3>
+            <LinkButton icon={CgCalendarDates} onClick={() => history.push(`${pages.TodaysScrims}`)}>New Scrimmage</LinkButton>
 
 
             <h3>Scrimmages</h3>
-            <LinkButton icon={CgAdd} onClick={() => history.push(`${pages.AddScrimPage}`)}>Add Scrimmage</LinkButton>
             <LinkButton icon={CgAdd}>All Scrimmages</LinkButton>
-            
 
             <h3>Officials</h3>
-
             <LinkButton icon={CgUserAdd} onClick={() => history.push(`${pages.AddOfficial}`)}>New Official</LinkButton>
             <LinkButton icon={CgUserList} onClick={() => history.push(`${pages.AllOfficials}`)}>All Officials</LinkButton>
 

@@ -15,7 +15,7 @@ export const AllOfficials = () => {
                 {d => (
                     d.isLoading
                         ? <Loading />
-                        : <VStack>{d.value.map((e, i) => <LinkButton onClick={() => history.push(pages.EditOfficial(d.ids[i]))}>{e.derbyName}</LinkButton>)}</VStack>
+                        : <VStack>{d.value.map((e, i) => <LinkButton caption={e.name} onClick={() => history.push(pages.EditOfficial(d.ids[i]))}>{e.derbyName}</LinkButton>)}</VStack>
                 )}
             </FirestoreCollection>
         </Screen>

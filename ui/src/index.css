@@ -39,8 +39,36 @@ button {
   background: #2980b9;
   color: white;
   border: 0;
+  height: 40px;
 }
 
+button.back {
+  background-color: transparent;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%
+}
+
+td, th {
+  padding: 8px 0;
+  text-align: left;
+  font-weight: 400;
+}
+
+th {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1,
+h3 {
+  color: orange
+}
+
+p {
+  margin: 0.5em;
+}
 
 /* ul {
     padding: 0;
