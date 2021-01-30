@@ -61,7 +61,7 @@ export const ScrimForm = ({ id, scrim, onChange, onComplete, onDelete }: IScrimF
 
             <div style={{ height: "20px" }}></div>
 
-            <h3>Current Positions</h3>
+            {data.officials && data.officials.length > 0 && <h3>Current Positions</h3>}
 
             <table>
                 {data.officials && data.officials.length > 0 && <thead>
@@ -73,7 +73,7 @@ export const ScrimForm = ({ id, scrim, onChange, onComplete, onDelete }: IScrimF
                 </thead>}
                 <tbody>
                     {data.officials!.map((e, i) => <tr key={`${e.officialId.id}${e.positionId.id}`}>
-                        <td width="50%"><Viewer name="derbyName" item={e.officialId} /></td>
+                        <td width="50%"><Viewer name="derbyName" subName="name" item={e.officialId} /></td>
                         <td width="50%"><Viewer name="name" item={e.positionId} /></td>
                         <td width="45px">
                             <button onClick={() => handleRemovePosition(i)}>
@@ -94,6 +94,8 @@ export const ScrimForm = ({ id, scrim, onChange, onComplete, onDelete }: IScrimF
                 </tfoot>
             </table>
 
+            <h3>Notes</h3>
+
             <textarea onChange={e => handleNoteChange(e.target.value)}>{data.notes}</textarea>
 
             <div style={{ height: "40px" }}></div>
@@ -108,14 +110,26 @@ export const ScrimForm = ({ id, scrim, onChange, onComplete, onDelete }: IScrimF
     );
 };
 
+interface IViewerProps {
+    name: string;
+    item: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>
+    subName?: string;
+}
 
-const Viewer = ({ item, name }: { name: string, item: firebase.firestore.DocumentReference<firebase.firestore.DocumentData> }) => {
+const Viewer = ({ item, name, subName }: IViewerProps) => {
 
     const [data, setData] = React.useState("");
 
     useEffect(() => {
-        item.get().then(e => setData(e.data()![name]))
-    }, [item, name])
+        item.get().then(e => {
+            if (subName) {
+                setData(`${e.data()![name]} (${e.data()![subName]})`)
+            } else {
+                setData(e.data()![name])
+            }
+        })
+
+    }, [item, name, subName])
 
     return <>{data}</>
 }

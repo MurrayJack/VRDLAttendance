@@ -13,6 +13,12 @@ export const AddPosition = ({ onCancel, onAccept }: IAddPosition) => {
     const [official, setOfficial] = React.useState("")
     const [position, setPosition] = React.useState("")
 
+    const handleOnAdd = () => {
+        if (official && position) {
+            onAccept(official, position)
+        }
+    }
+
     return (
         <VStack>
 
@@ -21,7 +27,7 @@ export const AddPosition = ({ onCancel, onAccept }: IAddPosition) => {
             <PositionsSelect value={position} onChange={setPosition} />
 
             <HStack col="1fr 1fr">
-                <button type="button" onClick={() => onAccept(official, position)}>Add</button>
+                <button disabled={!(official && position)} type="button" onClick={handleOnAdd}>Add</button>
 
                 <button onClick={onCancel} type="button">Cancel</button>
             </HStack>

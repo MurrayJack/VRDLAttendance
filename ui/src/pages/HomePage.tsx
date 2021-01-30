@@ -12,7 +12,7 @@ export const HomePage = () => {
     return (
         <Screen allowBack={false} caption="Attendance">
             <h3>Today - {dateString}</h3>
-            <LinkButton icon={<CgCalendarDates />} onClick={() => history.push(`${pages.TodaysScrims}`)}>New Scrimmage</LinkButton>
+            <LinkButton icon={<CgCalendarDates />} onClick={() => history.push(`${pages.TodaysScrims}`)}>Todays Scrimmages</LinkButton>
 
 
             <h3>Scrimmages</h3>

@@ -11,7 +11,7 @@ export const AllOfficials = () => {
 
     return (
         <Screen allowBack caption="All Officials">
-            <FirestoreCollection path="/officials/">
+            <FirestoreCollection path="/officials/" orderBy={[{ field: "derbyName", type: "asc" }]}>
                 {d => (
                     d.isLoading
                         ? <Loading />

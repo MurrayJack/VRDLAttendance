@@ -1,20 +1,22 @@
+import { FirestoreCollection } from "@react-firebase/firestore";
 import "firebase/firestore";
-import { useGet } from "./useQuery";
 
-export const PositionsSelect = ({ value, onChange }: any) => {
+interface IPositionsSelectProps {
+    value: string;
+    onChange: (val: string) => void;
+}
 
-    const { data, loading, ids } = useGet<any[]>("positions")
-
+export const PositionsSelect = ({ value, onChange }: IPositionsSelectProps) => {
     return (
-        <div>
-            {loading
-                ? <select><option>Loading ....</option></select>
-                : <select value={value} onChange={e => onChange(e.target.value)}>
-                    <option>- Select Position -</option>
-                    {data!.map((e: any, i: any) => <option value={ids[i]}>{e.name}</option>)}
-                </select>
-
-            }
-        </div>
+        <FirestoreCollection path="positions" orderBy={[{ field: "order", type: "asc" }]}>
+            {d => (
+                d.isLoading
+                    ? <select disabled><option>Loading ....</option></select>
+                    : <select value={value} onChange={e => onChange(e.target.value)}>
+                        <option>- Select Position -</option>
+                        {d.value!.map((e: any, i: any) => <option value={d.ids[i]}>{e.name}</option>)}
+                    </select>
+            )}
+        </FirestoreCollection>
     );
 };

@@ -19,3 +19,9 @@ export interface IOfficial {
     league: string;
     vrdlMember: "no" | "yes";
 }
+
+export interface IPosition {
+    name: string;
+    order: number;
+    type: "so" | "nso";
+}
