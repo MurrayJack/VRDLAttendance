@@ -9,22 +9,30 @@ export interface IScrimLink {
    home: string;
    away: string;
    date: string;
+   additional?: boolean;
 }
 
-export const ScrimLink = ({ home, away, date }: IScrimLink) => {
+export const ScrimLinkNew = ({ home, away, date }: IScrimLink) => {
+   if (home && away && date) {
+      return <ScrimLink home={home} away={away} date={date} additional />
+   }
+   return <LinkButton disabled>Enter Home and Away to continue</LinkButton>
+}
+
+export const ScrimLink = ({ home, away, date, additional }: IScrimLink) => {
 
    const { save } = useSave("scrims")
    const history = useHistory();
    const id = `${home}vs${away}-${date}`
 
    const handleOnClick = () => {
-
       if (data) {
          history.push(`${pages.AddScrimPage}/${id}`)
       } else {
          save(id, {
             home,
-            away
+            away,
+            additional: Boolean(additional)
          }).then(() => history.push(`${pages.AddScrimPage}/${id}`))
       }
    }
@@ -36,7 +44,7 @@ export const ScrimLink = ({ home, away, date }: IScrimLink) => {
          return `${data.officials ? `${data?.officials.length} official(s)` : "0 officials"}`
       }
 
-      return `Unplayed`
+      return ` `
    }
 
    return (

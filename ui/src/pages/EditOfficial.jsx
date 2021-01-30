@@ -2,7 +2,7 @@ import React from "react";
 import "firebase/firestore";
 import { Screen, OfficialForm, Loading } from "../components";
 import { useHistory, useParams } from "react-router-dom";
-import { useGet, useSave, useSubscription } from "../components/useQuery"
+import { useSave, useSubscription } from "../components/useQuery"
 import { pages } from "../pages/pages"
 
 export const EditOfficial = () => {

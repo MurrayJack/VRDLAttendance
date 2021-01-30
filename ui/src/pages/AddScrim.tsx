@@ -16,7 +16,7 @@ export const NewScrimPage = () => {
     const history = useHistory()
 
     const handleOnSave = (scrim: IScrim) => {
-        save(id, scrim).then(() => history.push(pages.TodaysScrims));
+        save(id, scrim);
     }
 
     return (
@@ -24,7 +24,10 @@ export const NewScrimPage = () => {
 
             {loading
                 ? <Center><Loading /></Center>
-                : <ScrimForm scrim={data!} onSave={handleOnSave} />
+                : <ScrimForm scrim={data!}
+                    onComplete={() => history.push(pages.TodaysScrims)}
+                    onChange={handleOnSave}
+                />
             }
 
         </Screen>

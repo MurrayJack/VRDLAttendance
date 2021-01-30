@@ -1,7 +1,9 @@
 export interface IScrim {
     home: string;
     away: string;
-    officials: Array<IScrimOfficial> | undefined
+    notes: string;
+    officials: Array<IScrimOfficial> | undefined;
+    additional: boolean;
 }
 
 export interface IScrimOfficial {

@@ -6,35 +6,39 @@ interface ILinkButton {
    caption?: string;
    icon?: () => React.ReactNode;
    onClick?: () => void;
+   disabled?: boolean;
 }
 
-export const LinkButton: React.FC<ILinkButton> = ({ children, caption = "", icon = () => <CgAdd />, ...props }) => {
+export const LinkButton: React.FC<ILinkButton> = ({ children, caption = "", icon = () => <CgAdd />, onClick, disabled = false }) => {
+
+   const Button = styled.button`
+      background: var(--color-primary-bg);
+      color: var(--color-primary-fg);
+      height: 45px;
+      font-size: 16px;
+   
+      > span {
+         display: grid;
+         align-items: center;
+         text-align: left;
+         grid-template-columns: ${() => disabled ? "1fr" : "14px 1fr auto 20px"}; 
+         gap: 8px;
+         text-align: ${() => disabled ? "center" : "left"};
+   
+      }
+   `
 
    return (
       <>
-         <Button {...props}>
+         <Button onClick={onClick} disabled={disabled}>
             <span>
-               {icon()}
+               {!disabled && icon()}
                <span>{children}</span>
-               <span>{caption}</span>
-               <CgChevronRight />
+               {caption && <span>{caption}</span>}
+               {onClick && <CgChevronRight />}
             </span>
          </Button>
       </>
    );
 };
 
-const Button = styled.button`
-  background: var(--color-primary-bg);
-  color: var(--color-primary-fg);
-  height: 45px;
-  font-size: 16px;
-
-  > span {
-   display: grid;
-   align-items: center;
-   text-align: left;
-   grid-template-columns: 14px 1fr auto 20px;
-   gap: 8px;
-  }
-`

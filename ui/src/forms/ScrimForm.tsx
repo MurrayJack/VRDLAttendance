@@ -7,11 +7,12 @@ import "firebase/firestore";
 import { CgTrash } from "react-icons/cg";
 
 export interface IScrimForm {
-    onSave: (data: IScrim) => void;
+    onChange: (data: IScrim) => void;
+    onComplete: () => void;
     scrim: IScrim;
 }
 
-export const ScrimForm = ({ scrim, onSave }: IScrimForm) => {
+export const ScrimForm = ({ scrim, onChange, onComplete }: IScrimForm) => {
 
     const db = firebase.firestore();
 
@@ -30,16 +31,20 @@ export const ScrimForm = ({ scrim, onSave }: IScrimForm) => {
 
         setData(data)
         showAdding(false)
+        onChange(data)
     }
 
     const handleRemovePosition = (i: number) => {
         const newData = { ...data }
         newData.officials?.splice(i, 1);
         setData(newData)
+        onChange(data)
     }
 
-    const handleOnSave = () => {
-        onSave(data);
+    const handleNoteChange = (value: string) => {
+        data.notes = value;
+        setData(data)
+        onChange(data)
     }
 
     return (
@@ -51,6 +56,8 @@ export const ScrimForm = ({ scrim, onSave }: IScrimForm) => {
             <Label horizontal caption="Away Team">
                 <p>{data.away}</p>
             </Label>
+
+            <div style={{ height: "20px" }}></div>
 
             <h3>Current Positions</h3>
 
@@ -66,7 +73,7 @@ export const ScrimForm = ({ scrim, onSave }: IScrimForm) => {
                     {data.officials!.map((e, i) => <tr key={`${e.officialId.id}${e.positionId.id}`}>
                         <td width="50%"><Viewer name="derbyName" item={e.officialId} /></td>
                         <td width="50%"><Viewer name="name" item={e.positionId} /></td>
-                        <td width="40px">
+                        <td width="45px">
                             <button onClick={() => handleRemovePosition(i)}>
                                 <CgTrash />
                             </button>
@@ -85,9 +92,11 @@ export const ScrimForm = ({ scrim, onSave }: IScrimForm) => {
                 </tfoot>
             </table>
 
+            <textarea onChange={e => handleNoteChange(e.target.value)}>{data.notes}</textarea>
+
             <div style={{ height: "40px" }}></div>
 
-            <button onClick={handleOnSave}>Save Scrim</button>
+            <button onClick={onComplete}>Done</button>
 
         </VStack>
     );
@@ -100,71 +109,7 @@ const Viewer = ({ item, name }: { name: string, item: firebase.firestore.Documen
 
     useEffect(() => {
         item.get().then(e => setData(e.data()![name]))
-
-
-    }, [])
+    }, [item, name])
 
     return <>{data}</>
 }
-
-{/* <FirestoreMutation type="set" path={`/scrims/${uuidv4()}`}>
-                {({ runMutation }) => (
-                    <>
-
-                        <input placeholder="Scrim Name" name="name" value={name} onChange={e => setName(e.target.value)} />
-                        
-                        <input placeholder="Scrim Name" name="name" value={name} onChange={e => setName(e.target.value)} />
-
-
-                        <h3>Current Positions</h3>
-
-                        <table>
-                            {officials.length > 0 && <thead>
-                                <tr>
-                                    <th>Official</th>
-                                    <th>Position</th>
-                                </tr>
-                            </thead>}
-                            <tbody>
-                                {officials.map(e => <tr><td>{e.official}</td><td>{e.position}</td></tr>)}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colSpan={2}>
-                                        {!adding && <button class="primary" type="button" onClick={() => showAdding(true)}>Add Official</button>}
-
-                                        {adding && <AddPosition onCancel={() => showAdding(false)} onAccept={handleAddPosition} />}
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-
-                        <div style={{ height: "40px" }}></div>
-
-                        <button onClick={() => handleSave(runMutation)} class="primary">Save Scrim</button>
-                    </>
-                )}
-            </FirestoreMutation > */}
-
-
-                // const history = useHistory();
-    // const [adding, showAdding] = useState(false)
-    // const [officials, setOfficials] = useState([])
-    // const [name, setName] = useState("")
-
-    // const handleSave = (mutation) => {
-
-    //     const object = {
-    //         positions: officials,
-    //         name: name,
-    //         date: firebase.firestore.FieldValue.serverTimestamp()
-    //     }
-
-    //     mutation(object).then(() => history.push("/"))
-    // }
-
-    // const handleAddPosition = (official, position) => {
-    //     officials.push({ official, position });
-    //     setOfficials(officials)
-    //     showAdding(false)
-    // }
