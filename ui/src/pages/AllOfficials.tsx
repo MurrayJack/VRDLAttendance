@@ -11,11 +11,11 @@ export const AllOfficials = () => {
 
     return (
         <Screen allowBack caption="All Officials">
-            <FirestoreCollection path="/officials/" limitToFirst={20}>
+            <FirestoreCollection path="/officials/">
                 {d => (
                     d.isLoading
                         ? <Loading />
-                        : <VStack>{d.value.map((e, i) => <LinkButton caption={e.name} onClick={() => history.push(pages.EditOfficial(d.ids[i]))}>{e.derbyName}</LinkButton>)}</VStack>
+                        : <VStack>{d.value.map((e: any, i: number) => <LinkButton caption={e.name} onClick={() => history.push(pages.EditOfficial(d.ids[i]))}>{e.derbyName}</LinkButton>)}</VStack>
                 )}
             </FirestoreCollection>
         </Screen>

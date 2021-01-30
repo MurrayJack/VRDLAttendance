@@ -4,12 +4,12 @@ import { CgChevronRight, CgAdd } from "react-icons/cg";
 
 interface ILinkButton {
    caption?: string;
-   icon?: () => React.ReactNode;
+   icon?: React.ReactNode;
    onClick?: () => void;
    disabled?: boolean;
 }
 
-export const LinkButton: React.FC<ILinkButton> = ({ children, caption = "", icon = () => <CgAdd />, onClick, disabled = false }) => {
+export const LinkButton: React.FC<ILinkButton> = ({ children, caption = "", icon = <CgAdd />, onClick, disabled = false }) => {
 
    const Button = styled.button`
       background: var(--color-primary-bg);
@@ -32,7 +32,7 @@ export const LinkButton: React.FC<ILinkButton> = ({ children, caption = "", icon
       <>
          <Button onClick={onClick} disabled={disabled}>
             <span>
-               {!disabled && icon()}
+               {!disabled && icon}
                <span>{children}</span>
                {caption && <span>{caption}</span>}
                {onClick && <CgChevronRight />}

@@ -42,9 +42,12 @@ export const TodaysScrimmages = () => {
             <ScrimLink home="A" away="B" date={todayID()} />
             <ScrimLink home="A" away="A" date={todayID()} />
 
-            <div style={{ height: "40px" }}></div>
-
-            <h3>Additional Scrimmages</h3>
+            {data && data!.filter(e => e.additional).length > 0 &&
+                <>
+                    <div style={{ height: "40px" }}></div>
+                    <h3>Additional Scrimmages</h3>
+                </>
+            }
 
             {data && data!.filter(e => e.additional).map(e => <ScrimLink home={e.home} away={e.away} date={todayID()} />)}
 

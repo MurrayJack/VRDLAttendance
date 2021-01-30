@@ -48,6 +48,10 @@ button.back {
   background-color: transparent;
 }
 
+button.delete {
+  background-color: red;
+}
+
 table {
   border-collapse: collapse;
   width: 100%

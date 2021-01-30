@@ -10,11 +10,12 @@ import { EditOfficial } from "./pages/EditOfficial";
 import { pages } from "./pages/pages";
 import { NewScrimPage } from "./pages/AddScrim";
 import { TodaysScrimmages } from "./pages/TodaysScrims"
+import { AllScrims } from "./pages/AllScrims";
 
 function App() {
   return (
     <Router>
-      <FirestoreProvider firebase={firebase} {...config}>
+      <FirestoreProvider databaseURL="" firebase={firebase} {...config}>
 
         <Switch>
 
@@ -36,6 +37,10 @@ function App() {
 
           <Route path={pages.TodaysScrims}>
             <TodaysScrimmages />
+          </Route>
+
+          <Route path="all-scrims">
+            <AllScrims />
           </Route>
 
           <Route path="/">

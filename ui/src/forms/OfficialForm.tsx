@@ -2,18 +2,25 @@ import React from "react";
 import "firebase/firestore";
 import { Label } from "../components/Label";
 import { Stack } from "../components";
+import { IOfficial } from "../typings";
 
-export const OfficialForm = ({ name, derbyName, vrdlMember, insurance, league, onClick, buttonCaption }) => {
+export interface IOfficialFormProps {
+   official?: IOfficial;
+   onClick: (data: IOfficial) => void;
+   buttonCaption: string;
+}
 
-   const [data, setData] = React.useState({
-      name: name || "",
-      derbyName: derbyName || "",
-      vrdlMember: vrdlMember || "",
-      insurance: insurance || "",
-      league: league || ""
-   })
+export const OfficialForm = ({ official, onClick, buttonCaption }: IOfficialFormProps) => {
 
-   const handleOnchange = e => {
+   const [data, setData] = React.useState<IOfficial>(official || {
+      name: "",
+      derbyName: "",
+      insurance: "no",
+      vrdlMember: "no",
+      league: ""
+   });
+
+   const handleOnchange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
       setData({ ...data, [e.target.name]: e.target.value })
    }
 
@@ -54,12 +61,10 @@ export const OfficialForm = ({ name, derbyName, vrdlMember, insurance, league, o
                   </select>
                </Label>
 
-               <p>
-                  <center>
-                     <strong>
-                        Officials without a league affiliation or insurance cannot be involved in scrimmages
-                     </strong>
-                  </center>
+               <p style={{ textAlign: "center" }}>
+                  <strong>
+                     Officials without a league affiliation or insurance cannot be involved in scrimmages
+                  </strong>
                </p>
 
             </>}

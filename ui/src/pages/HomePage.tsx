@@ -10,17 +10,17 @@ export const HomePage = () => {
     const dateString = (new Date()).toLocaleDateString("en-AU", { year: 'numeric', month: 'numeric', day: 'numeric' });
 
     return (
-        <Screen caption="Attendance">
+        <Screen allowBack={false} caption="Attendance">
             <h3>Today - {dateString}</h3>
-            <LinkButton icon={CgCalendarDates} onClick={() => history.push(`${pages.TodaysScrims}`)}>New Scrimmage</LinkButton>
+            <LinkButton icon={<CgCalendarDates />} onClick={() => history.push(`${pages.TodaysScrims}`)}>New Scrimmage</LinkButton>
 
 
             <h3>Scrimmages</h3>
-            <LinkButton icon={CgAdd}>All Scrimmages</LinkButton>
+            <LinkButton icon={<CgAdd />} onClick={() => history.push(`all-scrims`)}>All Scrimmages</LinkButton>
 
             <h3>Officials</h3>
-            <LinkButton icon={CgUserAdd} onClick={() => history.push(`${pages.AddOfficial}`)}>New Official</LinkButton>
-            <LinkButton icon={CgUserList} onClick={() => history.push(`${pages.AllOfficials}`)}>All Officials</LinkButton>
+            <LinkButton icon={<CgUserAdd />} onClick={() => history.push(`${pages.AddOfficial}`)}>New Official</LinkButton>
+            <LinkButton icon={<CgUserList />} onClick={() => history.push(`${pages.AllOfficials}`)}>All Officials</LinkButton>
 
         </Screen>
     );

@@ -15,8 +15,7 @@ export interface IScrimOfficial {
 export interface IOfficial {
     name: string;
     derbyName: string;
-    insurance: string;
+    insurance: "no" | "yes";
     league: string;
-    vrdlMember: string;
-    waver: string;
+    vrdlMember: "no" | "yes";
 }

@@ -7,12 +7,14 @@ import "firebase/firestore";
 import { CgTrash } from "react-icons/cg";
 
 export interface IScrimForm {
+    id: string;
     onChange: (data: IScrim) => void;
     onComplete: () => void;
+    onDelete: (id: string) => void;
     scrim: IScrim;
 }
 
-export const ScrimForm = ({ scrim, onChange, onComplete }: IScrimForm) => {
+export const ScrimForm = ({ id, scrim, onChange, onComplete, onDelete }: IScrimForm) => {
 
     const db = firebase.firestore();
 
@@ -97,6 +99,10 @@ export const ScrimForm = ({ scrim, onChange, onComplete }: IScrimForm) => {
             <div style={{ height: "40px" }}></div>
 
             <button onClick={onComplete}>Done</button>
+
+            <div style={{ height: "40px" }}></div>
+
+            <button className="delete" onClick={() => onDelete(id)}>Delete</button>
 
         </VStack>
     );
