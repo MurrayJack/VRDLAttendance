@@ -18,7 +18,11 @@ export const EditOfficial = () => {
 
             {!data
                 ? <Loading />
-                : <OfficialForm {...data} buttonCaption="Save" onClick={e => save(id, e).then(() => history.push(pages.AllOfficials))} />
+                : <OfficialForm
+                    official={data}
+                    buttonCaption="Save"
+                    onClick={e => save(id, e).then(() => history.push(pages.AllOfficials))}
+                />
             }
 
         </Screen>

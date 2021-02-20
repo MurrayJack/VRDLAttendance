@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Label, VStack } from "../components";
+import { HStack, Label, VStack } from "../components";
 import { AddPosition } from "../components/AddPosition";
 import { IScrim } from "../typings";
 import firebase from "firebase/app";
