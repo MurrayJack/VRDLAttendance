@@ -11,17 +11,16 @@ export interface IScrimOfficial {
     positionId: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
 }
 
-
 export interface IOfficial {
     name: string;
     derbyName: string;
-    insurance: "no" | "yes";
+    insurance: 'no' | 'yes';
     league: string;
-    vrdlMember: "no" | "yes";
+    vrdlMember: 'no' | 'yes';
 }
 
 export interface IPosition {
     name: string;
     order: number;
-    type: "so" | "nso";
+    type: 'so' | 'nso';
 }

@@ -7,6 +7,5 @@ export const pages = {
     AllOfficials: "/all-officials",
     AddOfficial: "/add-official",
     
-
     EditOfficial: id => `/edit-official/${id}`
 }

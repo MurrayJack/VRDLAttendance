@@ -1,1 +1,1 @@
-export * from "./ScrimForm"
+export * from './ScrimForm';

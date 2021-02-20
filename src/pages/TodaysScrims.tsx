@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { Label, Screen, ScrimLink, ScrimLinkNew } from "../components"
-import firebase from "firebase/app";
-import "firebase/firestore";
-import { today, todayID, tomorrow } from "../code/dateUtils";
-import { IScrim } from "../typings";
+import React, { useState } from 'react';
+import { Label, Screen, ScrimLink, ScrimLinkNew } from '../components';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import { today, todayID, tomorrow } from '../code/dateUtils';
+import { IScrim } from '../typings';
 
 export const TodaysScrimmages = () => {
-
-    const [newScrim, setNewScrim] = useState<{ home?: string, away?: string }>({})
-    const [data, setDate] = useState<IScrim[]>()
+    const [newScrim, setNewScrim] = useState<{ home?: string; away?: string }>(
+        {}
+    );
+    const [data, setDate] = useState<IScrim[]>();
 
     React.useEffect(() => {
         const db = firebase.firestore();
@@ -17,21 +18,21 @@ export const TodaysScrimmages = () => {
         let end = tomorrow();
 
         const get = () => {
-            db.collection("scrims")
-                .where("created", '>', start)
-                .where("created", '<', end)
+            db.collection('scrims')
+                .where('created', '>', start)
+                .where('created', '<', end)
                 .get()
                 .then(snapshot => {
-                    const items: IScrim[] = []
+                    const items: IScrim[] = [];
                     snapshot.forEach(docs => {
-                        items.push(docs.data() as IScrim)
-                    })
-                    setDate(items)
-                })
-        }
+                        items.push(docs.data() as IScrim);
+                    });
+                    setDate(items);
+                });
+        };
 
-        get()
-    }, [])
+        get();
+    }, []);
 
     return (
         <Screen allowBack caption="Todays Scrims">
@@ -42,29 +43,49 @@ export const TodaysScrimmages = () => {
             <ScrimLink home="A" away="B" date={todayID()} />
             <ScrimLink home="A" away="A" date={todayID()} />
 
-            {data && data!.filter(e => e.additional).length > 0 &&
+            {data && data!.filter(e => e.additional).length > 0 && (
                 <>
-                    <div style={{ height: "40px" }}></div>
+                    <div style={{ height: '40px' }}></div>
                     <h3>Additional Scrimmages</h3>
                 </>
-            }
+            )}
 
-            {data && data!.filter(e => e.additional).map(e => <ScrimLink home={e.home} away={e.away} date={todayID()} />)}
+            {data &&
+                data!
+                    .filter(e => e.additional)
+                    .map(e => (
+                        <ScrimLink
+                            home={e.home}
+                            away={e.away}
+                            date={todayID()}
+                        />
+                    ))}
 
-            <div style={{ height: "40px" }}></div>
+            <div style={{ height: '40px' }}></div>
 
             <h3>Add New Scrimmage</h3>
 
             <Label horizontal caption="Home Team">
-                <input onChange={e => setNewScrim({ ...newScrim, home: e.target.value })} />
+                <input
+                    onChange={e =>
+                        setNewScrim({ ...newScrim, home: e.target.value })
+                    }
+                />
             </Label>
 
             <Label horizontal caption="Away Team">
-                <input onChange={e => setNewScrim({ ...newScrim, away: e.target.value })} />
+                <input
+                    onChange={e =>
+                        setNewScrim({ ...newScrim, away: e.target.value })
+                    }
+                />
             </Label>
 
-            <ScrimLinkNew home={newScrim.home!} away={newScrim.away!} date={todayID()} />
-
+            <ScrimLinkNew
+                home={newScrim.home!}
+                away={newScrim.away!}
+                date={todayID()}
+            />
         </Screen>
     );
 };
