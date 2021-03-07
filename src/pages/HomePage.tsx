@@ -25,9 +25,9 @@ export const HomePage = () => {
             <h3>Scrimmages</h3>
             <LinkButton
                 icon={<CgAdd />}
-                onClick={() => history.push(`all-scrims`)}
+                onClick={() => history.push(pages.ScrimInfo)}
             >
-                All Scrimmages
+                Scrimmages Info
             </LinkButton>
 
             <h3>Officials</h3>

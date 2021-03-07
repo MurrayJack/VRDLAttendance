@@ -11,6 +11,7 @@ import { pages } from './pages/pages';
 import { NewScrimPage } from './pages/AddScrim';
 import { TodaysScrimmages } from './pages/TodaysScrims';
 import { AllScrims } from './pages/AllScrims';
+import ScrimInfo from './pages/ScrimInfo';
 
 function App() {
     return (
@@ -39,6 +40,10 @@ function App() {
 
                     <Route path="all-scrims">
                         <AllScrims />
+                    </Route>
+
+                    <Route path={pages.ScrimInfo}>
+                        <ScrimInfo />
                     </Route>
 
                     <Route path="/">
